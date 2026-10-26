@@ -27,5 +27,5 @@ export async function getPosts() {
 }
 
 export function formatDate(d: Date) {
-  return d.toISOString().slice(0, 10);
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 }

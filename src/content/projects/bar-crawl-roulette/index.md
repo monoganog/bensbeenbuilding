@@ -2,7 +2,7 @@
 title: "Bar Crawl Roulette"
 summary: "Get dropped in a city, find the closest bar on Google Street View and finish your drink."
 live: https://barcrawlroulette.com
-date: 2026-10-09
+date: 2026-10-26
 ---
 
 Bar Crawl Roulette is a game best played with friends and your choice of drink. Get dropped in a city and it's up to you to find the closest bar using Google Street View... and also finish that drink.

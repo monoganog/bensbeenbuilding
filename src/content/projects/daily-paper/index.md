@@ -1,7 +1,7 @@
 ---
 title: "Daily Paper"
 summary: "A daily news piece that's hyper personalised to me and removes the morning scroll."
-date: 2026-10-25
+date: 2026-10-26
 ---
 
 My morning starts, no doubt, much like yours. A loud noise slingshots me into a form of consciousness. I'm surprised it's not talked about more often. A feeling we all feel. Every. Single. Day.

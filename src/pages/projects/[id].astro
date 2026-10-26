@@ -2,7 +2,7 @@
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Hero from '../../components/Hero.astro';
-import { getProjects, getHero, type Project } from '../../lib/content';
+import { getProjects, getHero, formatDate, type Project } from '../../lib/content';
 
 export async function getStaticPaths() {
   const projects = await getProjects();
@@ -10,7 +10,7 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props as { project: Project };
-const { title, summary, live } = project.data;
+const { title, summary, live, date } = project.data;
 const { Content } = await render(project);
 ---
 
@@ -21,6 +21,7 @@ const { Content } = await render(project);
       <Hero src={getHero(project.id)} alt={`Screenshot of ${title}`} widths={[720, 1440]} sizes="(max-width: 760px) 100vw, 720px" eager />
     </div>
     <h1>{title}</h1>
+    <time class="date muted" datetime={date.toISOString().slice(0, 10)}>{formatDate(date)}</time>
     <p class="summary muted">{summary}</p>
     <div class="prose"><Content /></div>
     {live && <a class="live" href={live}>Visit {new URL(live).host} →</a>}
@@ -31,6 +32,7 @@ const { Content } = await render(project);
   article { max-width: 720px; margin: 0 auto; }
   .hero { margin-top: 24px; }
   h1 { font-size: clamp(1.75rem, 4vw, 2.25rem); margin: 32px 0 6px; }
+  .date { display: block; font-size: 0.9rem; margin-bottom: 12px; }
   .summary { font-size: 1.1rem; margin: 0 0 20px; }
   .live {
     display: inline-block; margin-top: 24px; padding: 10px 18px;
