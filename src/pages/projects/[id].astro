@@ -1,0 +1,41 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import { getProjects, getHero, type Project } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project) => ({ params: { id: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props as { project: Project };
+const { title, summary, live } = project.data;
+const { Content } = await render(project);
+---
+
+<Base title={title} description={summary}>
+  <article>
+    <a class="back" href="/">← All projects</a>
+    <div class="hero">
+      <Hero src={getHero(project.id)} alt={`Screenshot of ${title}`} widths={[720, 1440]} sizes="(max-width: 760px) 100vw, 720px" eager />
+    </div>
+    <h1>{title}</h1>
+    <p class="summary muted">{summary}</p>
+    <div class="prose"><Content /></div>
+    {live && <a class="live" href={live}>Visit {new URL(live).host} →</a>}
+  </article>
+</Base>
+
+<style>
+  article { max-width: 720px; margin: 0 auto; }
+  .hero { margin-top: 24px; }
+  h1 { font-size: clamp(1.75rem, 4vw, 2.25rem); margin: 32px 0 6px; }
+  .summary { font-size: 1.1rem; margin: 0 0 20px; }
+  .live {
+    display: inline-block; margin-top: 24px; padding: 10px 18px;
+    background: var(--text); color: var(--bg); border-radius: 6px;
+    text-decoration: none; font-weight: 600;
+  }
+  .live:hover { opacity: 0.85; }
+</style>

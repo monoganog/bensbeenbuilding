@@ -1,0 +1,14 @@
+{
+  "name": "portfolio",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "new": "node scripts/new.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.18.2"
+  }
+}

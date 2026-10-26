@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectTile from '../components/ProjectTile.astro';
+import { getProjects } from '../lib/content';
+
+const projects = await getProjects();
+---
+
+<Base>
+  <header>
+    <h1>Ben’s Been Building</h1>
+    <p class="muted">Some things I’ve been up to.</p>
+  </header>
+
+  <section class="grid">
+    {projects.map((p) => <ProjectTile project={p} />)}
+  </section>
+</Base>
+
+<style>
+  header { margin-bottom: 48px; }
+  h1 { font-size: clamp(2rem, 5vw, 2.75rem); margin: 0 0 8px; }
+  header p { margin: 0; font-size: 1.1rem; }
+  .grid {
+    display: grid; gap: 40px 28px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+</style>

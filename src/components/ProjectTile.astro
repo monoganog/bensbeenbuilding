@@ -1,0 +1,23 @@
+---
+import Hero from './Hero.astro';
+import { getHero, type Project } from '../lib/content';
+
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+const { title, summary } = project.data;
+---
+
+<a class="tile" href={`/projects/${project.id}`}>
+  <Hero src={getHero(project.id)} alt="" widths={[400, 800]} sizes="(max-width: 700px) 100vw, 300px" />
+  <h2>{title}</h2>
+  <p class="muted">{summary}</p>
+</a>
+
+<style>
+  .tile { display: block; text-decoration: none; }
+  h2 { font-size: 1.05rem; font-weight: 600; margin: 14px 0 4px; }
+  p { margin: 0; font-size: 0.95rem; }
+  .tile:hover h2 { text-decoration: underline; text-underline-offset: 3px; }
+</style>
